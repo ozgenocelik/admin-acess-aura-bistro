@@ -1,0 +1,430 @@
+:root {
+    --bg-ivory: #F9F7F2;
+    --text-graphite: #1A1A1A;
+    --accent-gold: #C5A059;
+    --secondary-stone: #E2E2E2;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-ivory);
+    color: var(--text-graphite);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.bistro-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2rem;
+    background-color: var(--bg-ivory);
+    position: relative; /* For lang-switcher positioning */
+}
+
+.lang-switcher {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-graphite);
+    opacity: 0.4;
+    cursor: pointer;
+    padding: 0.2rem;
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+}
+
+.lang-btn.active {
+    opacity: 1;
+    font-weight: 500;
+    color: var(--accent-gold);
+}
+
+.divider {
+    color: var(--secondary-stone);
+    font-size: 0.6rem;
+}
+
+.bistro-logo {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Sticky Navigation */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    background-color: rgba(249, 247, 242, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--secondary-stone);
+    scrollbar-width: none; /* Firefox */
+}
+
+.sticky-nav::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.category-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-graphite);
+    opacity: 0.5;
+    cursor: pointer;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    padding-bottom: 0.2rem;
+}
+
+.category-btn.active {
+    opacity: 1;
+    color: var(--accent-gold);
+    border-bottom: 1px solid var(--accent-gold);
+}
+
+/* Menu Container */
+.menu-container {
+    padding: 3rem 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.category-section {
+    margin-bottom: 4rem;
+}
+
+.category-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: var(--text-graphite);
+    letter-spacing: 0.1em;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-heading);
+}
+
+.item-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.item-price {
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+}
+
+.item-desc {
+    font-size: 0.95rem;
+    color: rgba(26, 26, 26, 0.7);
+    line-height: 1.5;
+}
+
+/* Loading state */
+.loader {
+    text-align: center;
+    font-family: var(--font-heading);
+    color: var(--accent-gold);
+    letter-spacing: 0.1em;
+    font-size: 1.2rem;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Footer */
+.bistro-footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    font-size: 0.8rem;
+    color: rgba(26, 26, 26, 0.5);
+    border-top: 1px solid var(--secondary-stone);
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-link {
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+}
+
+.admin-link:hover {
+    opacity: 1;
+}
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-item {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* Admin Styling Enhancements */
+.admin-container {
+    max-width: 1000px !important;
+    margin: 3rem auto !important;
+    padding: 3rem 4rem !important;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.05);
+    animation: fadeIn 0.5s ease;
+}
+
+.admin-header h2 {
+    font-family: var(--font-heading);
+    letter-spacing: 0.1em;
+    color: var(--text-graphite);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.1);
+}
+
+.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.8rem 1.5rem;
+    background: var(--text-graphite);
+    color: var(--bg-ivory);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+}
+
+.btn:hover {
+    background: var(--accent-gold);
+    color: white;
+}
+
+#menuTable {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#menuTable th {
+    background: var(--secondary-stone);
+    color: var(--text-graphite);
+    font-weight: 500;
+}
+
+#menuTable tr:hover {
+    background: rgba(197, 160, 89, 0.05);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--secondary-stone);
+    font-family: var(--font-body);
+    background-color: var(--bg-ivory);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--secondary-stone);
+    font-size: 0.9rem;
+}
+
+th {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(26,26,26,0.6);
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#alertBox {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.alert-error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.alert-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+
+/* Mobile responsive fixes */
+@media (max-width: 600px) {
+    .bistro-logo {
+        max-width: 200px;
+    }
+    
+    .admin-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    #itemForm > div {
+        flex-direction: column !important;
+        gap: 0 !important;
+    }
+
+    /* Table to Card Transformation */
+    #menuTable {
+        border: none;
+    }
+
+    #menuTable thead {
+        display: none; /* Hide headers */
+    }
+
+    #menuTable tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        background: #fff;
+        border: 1px solid rgba(197, 160, 89, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    }
+
+    #menuTable td {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-bottom: 1px solid rgba(226, 226, 226, 0.5);
+        padding: 1rem 0;
+        text-align: left;
+    }
+
+    #menuTable td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    /* Use data-label for mobile view */
+    #menuTable td::before {
+        content: attr(data-label);
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--accent-gold);
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .actions {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .actions .btn {
+        width: auto;
+        flex: 1;
+        text-align: center;
+        margin-top: 0;
+    }
+}
+
