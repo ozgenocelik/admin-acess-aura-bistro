@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const alertBox = document.getElementById('alertBox');
     
     // Auth Logic
-    const ACCESS_KEY = 'Aura2024'; // Simple access key
+    const emailInput = document.getElementById('adminEmail');
+    const passwordInput = document.getElementById('adminPassword');
     const loginOverlay = document.getElementById('loginOverlay');
     const loginBtn = document.getElementById('loginBtn');
-    const passwordInput = document.getElementById('adminPassword');
     const loginError = document.getElementById('loginError');
     const adminContainer = document.querySelector('.admin-container');
     const logoutBtn = document.getElementById('logoutBtn');
@@ -47,30 +47,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initialize admin lang
     setAdminLang(currentAdminLang);
 
-    // Check if already logged in (session only)
-    if (sessionStorage.getItem('adminAuth') === 'true') {
-        unlockDashboard();
+    const supabaseClient = window.supabaseClient || window.supabase;
+
+    // Check if logged in via real Supabase session
+    if (supabaseClient) {
+        supabaseClient.auth.getSession().then(({ data: { session } }) => {
+            if (session) unlockDashboard();
+        });
     }
 
     loginBtn.addEventListener('click', handleLogin);
     passwordInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleLogin();
     });
+    if (emailInput) {
+        emailInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleLogin();
+        });
+    }
 
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            sessionStorage.removeItem('adminAuth');
+        logoutBtn.addEventListener('click', async () => {
+            if (supabaseClient) await supabaseClient.auth.signOut();
             location.reload();
         });
     }
 
-    function handleLogin() {
-        if (passwordInput.value === ACCESS_KEY) {
-            sessionStorage.setItem('adminAuth', 'true');
-            unlockDashboard();
-        } else {
+    async function handleLogin() {
+        if (!supabaseClient) return;
+        loginBtn.textContent = '...';
+        loginBtn.disabled = true;
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+        
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        
+        if (error) {
+            loginError.textContent = error.message;
             loginError.style.display = 'block';
-            passwordInput.value = '';
+            loginBtn.textContent = currentAdminLang === 'en' ? 'LOGIN' : 'ACCEDI';
+            loginBtn.disabled = false;
+        } else {
+            unlockDashboard();
+            loginBtn.textContent = currentAdminLang === 'en' ? 'LOGIN' : 'ACCEDI';
+            loginBtn.disabled = false;
         }
     }
 
